@@ -9,56 +9,17 @@ var App = function() {
 
   // Retun a number between 0-2 to match element in options
   function getRandomInt() {
-    return Math.floor(Math.random() * (4 - 1) + 1);
+    return Math.floor(Math.random() * 3);
   }
 
   function getWinner(optionOne, optionTwo) {
-    switch(optionOne) {
-      case 'rock':
-        if(optionTwo === 'rock') {
-          return null;
-        }
-
-        if(optionTwo === 'scissors') {
-          return true;
-        }
-
-        if(optionTwo === 'paper') {
-          return false;
-        }
-        break;
-      case 'paper':
-        if(optionTwo ==='paper') {
-          return null;
-        }
-
-        if(optionTwo ==='rock') {
-          return true;
-        }
-
-        if(optionTwo === 'scissors') {
-          return false;
-        }
-        break;
-      case 'scissors':
-        if(optionTwo === 'scissors') {
-          return null;
-        }
-
-        if(optionTwo === 'paper') {
-          return true;
-        }
-
-        if(optionTwo === 'rock') {
-          return false;
-        }
-        break;
+    if (optionOne === optionTwo){
+      return null;
     }
-    return null;
-  }
-
-  function getResult() {
-    return options[getRandomInt() - 1];
+    else if (optionOne - optionTwo === 1 || optionOne - optionTwo === -2){
+      return true;
+    }
+    return false;
   }
 
   function returnWinner(playerOneResult, playerTwoResult) {
@@ -82,16 +43,16 @@ var App = function() {
     e.preventDefault();
 
     var $current = $(e.currentTarget),
-      playerOneResult = getResult(),
-      playerTwoResult = getResult(),
+      playerOneResult = getRandomInt(),
+      playerTwoResult = getRandomInt(),
       winner = returnWinner(playerOneResult, playerTwoResult);
 
     $current.removeClass('btn-primary').addClass('btn-success');
 
-    $('#result-player-one').text(playerOneResult);
+    $('#result-player-one').text(options[playerOneResult]);
     $('#player-one-count').text(playerOneCount);
 
-    $('#result-player-two').text(playerTwoResult);
+    $('#result-player-two').text(options[playerTwoResult]);
     $('#player-two-count').text(playerTwoCount);
 
     if(playerOneCount === 3) {
