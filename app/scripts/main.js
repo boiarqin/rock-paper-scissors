@@ -4,6 +4,8 @@ var App = function() {
   var options = ['rock', 'paper', 'scissors'];
   var playerOneCount = 0;
   var playerTwoCount = 0;
+  var playerOneCountTotal = 0;
+  var playerTwoCountTotal = 0;
 
   // Retun a number between 0-2 to match element in options
   function getRandomInt() {
@@ -91,6 +93,16 @@ var App = function() {
 
     $('#result-player-two').text(playerTwoResult);
     $('#player-two-count').text(playerTwoCount);
+
+    if(playerOneCount === 3) {
+      playerOneCountTotal++;
+      $('#player-one-count-total').text(playerOneCountTotal);
+    }
+
+    if(playerTwoCount === 3) {
+      playerTwoCountTotal++;
+      $('#player-two-count-total').text(playerTwoCountTotal);
+    }
 
     if(playerOneCount === 3 || playerTwoCount === 3) {
       $('#result').text(winner + ' Wins!');
